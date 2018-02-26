@@ -6,10 +6,10 @@ float zoff = 0;
 int angleMultiplier;
 
 PVector[] flowfield;
-Particle[] particles = new Particle[10000];
+Particle[] particles = new Particle[1000];
 
 void setup() {
-  size(800, 800);
+  size(400, 400);
   cols = round(width / scl);
   rows = round(height / scl);
   
@@ -24,30 +24,19 @@ void setup() {
   ystart = random(500);
   angleMultiplier = floor(random(10));
   
-  //noLoop();
-  background(0);
-  updateField();
+  //updateField();
 }
 
 void draw() {
-  //blendMode(BLEND);
   background(0);
   
   updateField();
   
-  //blendMode(ADD);
   for (int i = 0; i < particles.length; i++) {
     particles[i].follow(flowfield);
     particles[i].update();
     particles[i].show();
   }
-  
-  //if (frameCount % 100 == 0) {
-  //  println("reset");
-  //  //xstart = random(5000);
-  //  //ystart = random(5000);
-  //  angleMultiplier = floor(random(10));
-  //}
 }
 
 void updateField() {
@@ -56,23 +45,18 @@ void updateField() {
     float xoff = xstart;
     for (int x = 0; x < cols; x++) {
       int fieldIndex = x+y*cols;
-      float angle = 0;
-      //angle = noise(xoff, yoff, zoff) * TWO_PI * 4;
-      //angle = noise(xoff, yoff) * TWO_PI * 4;
-      //angle = sin(xoff) * cos(yoff) * sin(zoff) * PI * 4;// angleMultiplier * 1;
-      angle = (sin(xoff) + cos(yoff) + sin(zoff)) * PI * angleMultiplier * 0.1;
-      //angle = (sin(x * xoff) + sin(y * yoff)) * PI;
+      float angle = noise(xoff, yoff, zoff) * TWO_PI * 2;
       PVector v = PVector.fromAngle(angle);
-      v.setMag(1);
+      v.setMag(0.1);
       flowfield[fieldIndex] = v;
       
-      //strokeWeight(1);
-      //stroke(255, 250);
-      //pushMatrix();
-      //translate(x*scl, y*scl);
-      //rotate(v.heading());
-      //line(0, 0, scl, 0);
-      //popMatrix();
+      strokeWeight(1);
+      stroke(255, 50);
+      pushMatrix();
+      translate(x*scl, y*scl);
+      rotate(v.heading());
+      line(0, 0, scl, 0);
+      popMatrix();
       
       xoff += 0.1;
     }

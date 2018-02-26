@@ -29,8 +29,6 @@ class Particle {
     
     if (x >= 0 && x < cols && y >= 0 && y < rows) {
       fieldIndex = x + y * cols;
-      //println(field.length);
-      //println(fieldIndex);
       applyForce(field[fieldIndex]);
     }
   }
@@ -39,18 +37,6 @@ class Particle {
     strokeWeight(2);
     stroke(255, 150);
     point(pos.x, pos.y);
-    
-    //blendMode(ADD);
-    //stroke(255, 0, 0);
-    //point(pos.x, pos.y);
-    
-    //PVector trail = pos.copy().sub(vel);
-    //stroke(0, 255, 0);
-    //point(trail.x, trail.y);
-    
-    //trail.sub(vel);
-    //stroke(0, 0, 255);
-    //point(trail.x, trail.y);
   }
   
   private void edges() {
