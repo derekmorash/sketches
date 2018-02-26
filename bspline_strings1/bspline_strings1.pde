@@ -42,8 +42,8 @@ void draw() {
   while (vertices.get(0).y <= height - 40) {
     beginShape();
     for (int i = 0; i < vertices.size(); i++) {
-      float rangeX = i * 0.1 + loop_index * 0.0001;
-      float rangeY = i * 0.1 + loop_index * 0.0001;
+      float rangeX = i * 0.05 + loop_index * 0.0001;
+      float rangeY = i * 0.1 + loop_index * 0.001;
       float offsetX = map(round(random(-1, 1)), -1, 1, -rangeX, rangeX);
       float offsetY = map(round(random(-1, 1)), -1, 1, -rangeY, rangeY);
       
