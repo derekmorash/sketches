@@ -36,21 +36,21 @@ class Particle {
   }
   
   void show() {
-    strokeWeight(2);
-    stroke(255, 150);
+    strokeWeight(4);
+    stroke(255);
     point(pos.x, pos.y);
     
     //blendMode(ADD);
-    //stroke(255, 0, 0);
+    //stroke(255, 0, 0, 150);
     //point(pos.x, pos.y);
     
     //PVector trail = pos.copy().sub(vel);
-    //stroke(0, 255, 0);
-    //point(trail.x, trail.y);
+    //stroke(0, 255, 0, 150);
+    //point(pos.x-vel.x, pos.y-vel.y);
     
     //trail.sub(vel);
-    //stroke(0, 0, 255);
-    //point(trail.x, trail.y);
+    //stroke(0, 0, 255, 150);
+    //point(pos.x-vel.x-vel.x, pos.y-vel.y-vel.y);
   }
   
   private void edges() {
