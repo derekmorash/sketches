@@ -8,7 +8,7 @@ int angleMultiplier;
 //PVector[] flowfield;
 
 void setup() {
-  size(800, 800);
+  size(1000, 1000);
   cols = round(width / scl);
   rows = round(height / scl);
   
@@ -49,10 +49,10 @@ void updateField() {
     for (int x = 0; x < cols; x++) {
       //int fieldIndex = x+y*cols;
       float angle = 0;
-      angle = noise(xoff, yoff, zoff) * TWO_PI;
+      //angle = noise(xoff, yoff, zoff) * TWO_PI;
       //angle = noise(xoff, yoff) * TWO_PI * 4;
       //angle = sin(xoff) * cos(yoff) * sin(zoff) * PI * 4;// angleMultiplier * 1;
-      //angle = (sin(xoff) + cos(yoff) + sin(zoff)) * PI * angleMultiplier * 0.1;
+      angle = (sin(xoff) + cos(yoff) + sin(zoff)) * PI * angleMultiplier * 0.1;
       //angle = (sin(x * xoff) + sin(y * yoff)) * PI;
       //PVector v = PVector.fromAngle(angle);
       //v.setMag(0.01);
@@ -80,5 +80,5 @@ void updateField() {
     yoff += 0.1;
   }
   
-  zoff += 0.004;
+  zoff += 0.009;
 }
