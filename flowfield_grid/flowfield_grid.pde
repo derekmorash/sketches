@@ -1,5 +1,5 @@
 float inc = 0.01;
-int scl = 20;
+int scl = 10;
 int cols, rows;
 float xstart, ystart;
 float zoff = 0;
@@ -8,7 +8,7 @@ int angleMultiplier;
 GridPoint[] flowfield;
 
 void setup() {
-  size(400, 400);
+  size(600, 600);
   cols = round(width / scl);
   rows = round(height / scl);
   
@@ -18,12 +18,12 @@ void setup() {
   xstart = random(500);
   ystart = random(500);
   angleMultiplier = floor(random(10));
-  
-  //updateField();
 }
 
 void draw() {
   background(0);
+  
+  translate(scl/2, scl/2);
   
   updateField();
   drawField();
@@ -36,10 +36,11 @@ void updateField() {
     for (int x = 0; x < cols; x++) {
       int fieldIndex = x+y*cols;
       float angle = noise(xoff, yoff, zoff) * TWO_PI * 2;
-      PVector v = PVector.fromAngle(angle);
-      v.setMag(0.1);
+      PVector v = new PVector(x, y).rotate(angle);
+      v.setMag(noise(xoff, yoff, zoff)*zoff*20);
       flowfield[fieldIndex].angle = v;
-      flowfield[fieldIndex].showPos = flowfield[fieldIndex].startPos.copy().rotate(v.heading()).add(scl, 0);
+      flowfield[fieldIndex].showPos = flowfield[fieldIndex].startPos.copy().add(v);
+      //flowfield[fieldIndex].showPos.add(v);
       
       //strokeWeight(1);
       //stroke(255);
@@ -64,7 +65,7 @@ void drawField() {
       GridPoint thisPoint = flowfield[fieldIndex];
       thisPoint.show();
 
-      stroke(255, 250);
+      stroke(255, 150);
       strokeWeight(1);
       if (x < cols-1) {
         GridPoint nextXPoint = flowfield[(x+1)+y*cols];

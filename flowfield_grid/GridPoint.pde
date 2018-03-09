@@ -6,10 +6,11 @@ class GridPoint {
   
   GridPoint(PVector newPos) {
     startPos = newPos;
+    showPos = newPos;
   }
   
   void show() {
-    strokeWeight(4);
+    strokeWeight(2);
     stroke(255);
     point(showPos.x, showPos.y);
   }
