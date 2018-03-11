@@ -1,5 +1,5 @@
 float inc = 0.01;
-int scl = 10;
+int scl = 15;
 int cols, rows;
 float xstart, ystart;
 float zoff = 0;
@@ -8,9 +8,9 @@ int angleMultiplier;
 GridPoint[] flowfield;
 
 void setup() {
-  size(600, 600);
-  cols = round(width / scl);
-  rows = round(height / scl);
+  size(900, 900);
+  cols = round((width - 300) / scl);
+  rows = round((height - 300) / scl);
   
   flowfield = new GridPoint[cols*rows];
   initField();
@@ -18,15 +18,26 @@ void setup() {
   xstart = random(500);
   ystart = random(500);
   angleMultiplier = floor(random(10));
+  //blendMode(ADD);
 }
 
 void draw() {
   background(0);
   
-  translate(scl/2, scl/2);
+  translate(150 + scl/2, 150 + scl/2);
   
   updateField();
   drawField();
+  
+  
+  //saveFrame("frame-#####.png");
+  //noLoop();
+    
+  //saveFrame("screens/line-######.png");
+  //if (frameCount >= 680) {
+  //  noLoop();
+  //}
+  //println(frameCount);
 }
 
 void updateField() {
@@ -35,10 +46,18 @@ void updateField() {
     float xoff = xstart;
     for (int x = 0; x < cols; x++) {
       int fieldIndex = x+y*cols;
-      float angle = noise(xoff, yoff, zoff) * TWO_PI * 2;
+      //float angle = noise(xoff, yoff, zoff) * TWO_PI * 10;
+      //float angle = sin(xoff * x + yoff * y + zoff * fieldIndex);
+      //float angle = sin(xoff + yoff + zoff) * fieldIndex/2;
+      //float angle = sin((x + y) * zoff);
+      float angle = sin((xoff + x) * (yoff + y) * zoff);
       PVector v = new PVector(x, y).rotate(angle);
-      v.setMag(noise(xoff, yoff, zoff)*zoff*20);
-      flowfield[fieldIndex].angle = v;
+      //v.setMag(noise(xoff, yoff, zoff)*zoff*20);
+      //v.setMag(angle*scl*2);
+      v.setMag(scl/2);
+      //v.setMag(noise(x, y, scl)*scl);
+      
+      //flowfield[fieldIndex].angle = v;
       flowfield[fieldIndex].showPos = flowfield[fieldIndex].startPos.copy().add(v);
       //flowfield[fieldIndex].showPos.add(v);
       
@@ -55,7 +74,7 @@ void updateField() {
     yoff += 0.1;
   }
   
-  zoff += 0.004;
+  zoff += 0.01;
 }
 
 void drawField() {
@@ -63,7 +82,7 @@ void drawField() {
     for (int x = 0; x < cols; x++) {
       int fieldIndex = x+y*cols;
       GridPoint thisPoint = flowfield[fieldIndex];
-      thisPoint.show();
+      //thisPoint.show();
 
       stroke(255, 150);
       strokeWeight(1);
