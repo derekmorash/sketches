@@ -2,11 +2,11 @@ PVector[] vertices;
 float vertexAmt = 0.0005;
 
 void setup() {
-  size(900, 900);
+  size(400, 400);
   vertices = new PVector[floor(PI/vertexAmt)];
   println(vertices.length);
   noStroke();
-  noLoop();
+  //noLoop();
 }
 
 void draw() {
@@ -17,7 +17,7 @@ void draw() {
     drawCircle(i);
   }
   
-  saveFrame("frame-#####.png");
+  //saveFrame("frame-#####.png");
 }
 
 void drawCircle(int radius) {
