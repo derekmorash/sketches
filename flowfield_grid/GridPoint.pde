@@ -11,7 +11,8 @@ class GridPoint {
   
   void show() {
     strokeWeight(2);
-    stroke(255);
+    stroke(0);
+    //stroke(map(noise(showPos.x, showPos.y), 0, 1, 0, 255));
     point(showPos.x, showPos.y);
     
     //blendMode(ADD);
